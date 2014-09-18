@@ -33,6 +33,7 @@ class Queue:
 
     def enqueue(self, value):
         new = Node(value)
+        # I'd like this to be in init, but we could have empty queues.
         if self.head is None or self.tail is None:
             self.head, self.tail = new, new
         self.tail.child = new

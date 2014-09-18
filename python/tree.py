@@ -19,11 +19,30 @@ class Stack:
         new.child = self.head
         self.head = new
 
-root = Stack()
+class Queue:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def dequeue(self):
+        if self.head is None:
+            return None
+        ret = self.head.value
+        self.head = self.head.child
+        return ret
+
+    def enqueue(self, value):
+        new = Node(value)
+        if self.head is None or self.tail is None:
+            self.head, self.tail = new, new
+        self.tail.child = new
+        self.tail = self.tail.child
+
+root = Queue()
 l = [1,2,3,4,1,4,3,2,6]
 
 for i in l:
-    root.push(i)
+    root.enqueue(i)
 
 for i in range(9):
-    print root.pop()
+    print root.dequeue()

@@ -1,49 +1,39 @@
-class Node:
+class BiNode:
     def __init__(self, value):
         self.value = value
-        self.child = None
+        self.left = None
+        self.right = None
+    
+def insert(node, value):
+    if node.value > value:
+        if node.right:
+            insert(node.right, value)
+        else:
+            node.right = BiNode(value)
+    else:
+        if node.left:
+            insert(node.left, value)
+        else:
+            node.left = BiNode(value)
 
-class Stack:
-    def __init__(self):
-        self.head = None
+def inOrder(node):
+    if not node:
+        return ""
+    else:
+        return inOrder(node.right) + str(node.value) + inOrder(node.left)
 
-    def pop(self):
-        if self.head is None:
-            return None
-        ret = self.head.value
-        self.head = self.head.child
-        return ret
+def bfs(node):
+    if not node:
+        return ""
+    else:
+        return str(node.value) + bfs(node.left) + bfs(node.right)
 
-    def push(self, value):
-        new = Node(value)
-        new.child = self.head
-        self.head = new
 
-class Queue:
-    def __init__(self):
-        self.head = None
-        self.tail = None
-
-    def dequeue(self):
-        if self.head is None:
-            return None
-        ret = self.head.value
-        self.head = self.head.child
-        return ret
-
-    def enqueue(self, value):
-        new = Node(value)
-        # I'd like this to be in init, but we could have empty queues.
-        if self.head is None or self.tail is None:
-            self.head, self.tail = new, new
-        self.tail.child = new
-        self.tail = self.tail.child
-
-root = Queue()
+t = BiNode(0)
 l = [1,2,3,4,1,4,3,2,6]
 
 for i in l:
-    root.enqueue(i)
+    insert(t, i)
 
-for i in range(9):
-    print root.dequeue()
+print inOrder(t)
+print bfs(t)

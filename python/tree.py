@@ -4,32 +4,26 @@ class Node:
         self.child = None
 
 class Stack:
-    def __init(self):
-        self.head = Node():
+    def __init__(self):
+        self.head = None
 
     def pop(self):
+        if self.head is None:
+            return None
         ret = self.head.value
         self.head = self.head.child
         return ret
 
     def push(self, value):
-        insert(self.head, value)
+        new = Node(value)
+        new.child = self.head
+        self.head = new
 
-def insert(n, v):
-    if n.child is None:
-        n.child = Node(v)
-    else:
-        insert(n.child, v)
-
-def walk(n):
-    if n is not None:
-        print n.value
-        walk(n.child)
-
-root = Node(0)
+root = Stack()
 l = [1,2,3,4,1,4,3,2,6]
 
 for i in l:
-    insert(root, i)
+    root.push(i)
 
-walk(root)
+for i in range(9):
+    print root.pop()

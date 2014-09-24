@@ -1,35 +1,39 @@
-class Node:
+class BiNode:
     def __init__(self, value):
         self.value = value
-        self.child = None
-
-class Stack:
-    def __init(self):
-        self.head = Node():
-
-    def pop(self):
-        ret = self.head.value
-        self.head = self.head.child
-        return ret
-
-    def push(self, value):
-        insert(self.head, value)
-
-def insert(n, v):
-    if n.child is None:
-        n.child = Node(v)
+        self.left = None
+        self.right = None
+    
+def insert(node, value):
+    if node.value > value:
+        if node.right:
+            insert(node.right, value)
+        else:
+            node.right = BiNode(value)
     else:
-        insert(n.child, v)
+        if node.left:
+            insert(node.left, value)
+        else:
+            node.left = BiNode(value)
 
-def walk(n):
-    if n is not None:
-        print n.value
-        walk(n.child)
+def inOrder(node):
+    if not node:
+        return ""
+    else:
+        return inOrder(node.right) + str(node.value) + inOrder(node.left)
 
-root = Node(0)
+def bfs(node):
+    if not node:
+        return ""
+    else:
+        return str(node.value) + bfs(node.left) + bfs(node.right)
+
+
+t = BiNode(0)
 l = [1,2,3,4,1,4,3,2,6]
 
 for i in l:
-    insert(root, i)
+    insert(t, i)
 
-walk(root)
+print inOrder(t)
+print bfs(t)

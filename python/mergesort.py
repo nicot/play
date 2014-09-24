@@ -10,21 +10,21 @@ def mergesort(l):
         return merge(left, right)
 
 def merge(left, right):
-    # Not actually linear time because popping from the left side
-    # takes linear time
+    # Nontypical mergesort because of constant time access to end of list
     l = []
-    while left:
-        if right:
-            if left[0] > right[0]:
-                l.append(right.pop(0))
-            else:
-                l.append(left.pop(0))
+    while left and right:
+        if left[-1] < right[-1]:
+            l.append(right.pop())
         else:
-            l.append(left.pop(0))
+            l.append(left.pop())
 
+    while left:
+        l.append(left.pop())
     while right:
-        l.append(right.pop(0))
+        l.append(right.pop())
 
+    l.reverse()
     return l
+
 
 print mergesort(inpt)

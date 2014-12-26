@@ -1,39 +1,38 @@
-#![feature(phase)]
-#[phase(plugin, link)] extern crate log;
-
-use std::io::{TcpListener, TcpStream};
-use std::io::{Acceptor, Listener};
-
-fn handle_client(mut stream: TcpStream) {
-    match stream.write(b"HELLO!") {
-        Ok(()) => info!("Response sent"),
-        Err(e) => warn!("Failed to respond {}", e),
-    }
-    let mut buf = [100];
-    let n = stream.read(&mut buf);
-    println!("{}: {}", n, buf);
-    drop(stream);
-}
+use std::rand;
 
 fn main() {
+}
 
-    let listener = TcpListener::bind("127.0.0.1:1080").unwrap();
+#[test]
+fn qsort_test() {
+    let mut l = vec![3i, 2, 1, 0];
+    qsort(l.as_mut_slice());
+    assert!(l == [0, 1, 2, 3]);
+}
 
-    // bind the listener to the specified address
-    let mut acceptor = listener.listen();
-
-    // accept connections and process them, spawning a new tasks for each one
-    for stream in acceptor.incoming() {
-        match stream {
-            Err(e) => { warn!("fail: {}", e); }
-            Ok(stream) => spawn(proc() {
-                // connection succeeded
-                info!("Successfully accepted TCP connection.");
-                handle_client(stream)
-            })
-        }
+fn qsort<T: Ord>(l: &mut [T]) {
+    let length = l.len();
+    if length > 1 {
+        let pivot_index = partition(l);
+        qsort(l.slice_mut(0, pivot_index-1));
+        qsort(l.slice_mut(pivot_index, length));
     }
 
-    // close the socket server
-    drop(acceptor);
+    fn partition<T: Ord>(l: &mut [T]) -> uint {
+        let length = l.len();
+        let pivot_index = rand::random::<uint>()%(length-1);
+        l.swap(pivot_index, length-1);
+
+        let mut store_index = 0;
+        let mut i = 0u;
+        while i < length {
+            if l[i] <= l[length-1] {
+                l.swap(i, store_index);
+                store_index += 1;
+            }
+            i += 1;
+        }
+        store_index
+    }
 }
+

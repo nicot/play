@@ -24,3 +24,9 @@
    (reload :on-jsload 'us.nicot.core/run)
    (cljs)
    (target :dir #{"target"})))
+
+(deftask prod
+  []
+  (comp
+   (cljs :optimizations :advanced)
+   (target :dir #{"target"})))

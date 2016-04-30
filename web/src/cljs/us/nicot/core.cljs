@@ -37,5 +37,5 @@
               :margin-top "20px"}}
      [header]]))
 
-(defn ^export run []
+(defn ^:export run []
   (reagent/render [page] (.getElementById js/document "app")))

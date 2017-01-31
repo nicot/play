@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "browserify": "^14.0.0",
+    "tsify": "^3.0.1",
+    "typescript": "^2.1.5",
+    "watchify": "^3.9.0"
+  },
+  "scripts": {
+	  "start": "node scripts/build.js"
+  }
+}

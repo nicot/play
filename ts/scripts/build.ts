@@ -1,9 +1,9 @@
-let browserify = require('browserify')
-let tsify = require('tsify')
-let watchify = require('watchify')
-let fs = require('fs')
+import * as browserify from 'browserify'
+import * as tsify from 'tsify'
+import * as watchify from 'watchify'
+import * as fs from 'fs'
 
-function dirname(path) {
+function dirname(path: string): string {
 	return `${__dirname}/../${path}`
 }
 
@@ -20,7 +20,7 @@ function error(error) {
 	console.error(error.toString())
 }
 
-function time(time) {
+function time(time: number) {
 	console.log(`Bundle took ${time}ms to build.`)
 }
 

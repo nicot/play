@@ -1,5 +1,5 @@
 function sayHi(): void {
-	console.log('fooba!');
+	console.log('foobar!');
 }
 
 sayHi();

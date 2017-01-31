@@ -1,11 +1,15 @@
 {
   "dependencies": {
+    "@types/browserify": "^12.0.30",
+    "@types/node": "^7.0.4",
+    "@types/watchify": "^3.7.4",
     "browserify": "^14.0.0",
+    "ts-node": "^2.0.0",
     "tsify": "^3.0.1",
     "typescript": "^2.1.5",
     "watchify": "^3.9.0"
   },
   "scripts": {
-	  "start": "node scripts/build.js"
+    "start": "ts-node scripts/build.ts"
   }
 }

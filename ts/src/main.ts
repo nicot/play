@@ -1,5 +1,21 @@
+// import hotify from 'hotify'
+
 function sayHi(): void {
-	console.log('foobar!');
+	let x = 1
+	console.log('foobar!')
 }
 
-sayHi();
+sayHi()
+
+function foo(bar?: number) {
+
+}
+
+foo(null);
+
+
+function foo2(bar: string | undefined) {
+
+}
+
+foo2();

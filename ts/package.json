@@ -10,6 +10,6 @@
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "start": "ts-node scripts/build.ts"
+    "start": "ts-node --project tsconfig.json scripts/build.ts"
   }
 }

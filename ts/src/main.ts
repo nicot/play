@@ -1,11 +1,10 @@
-// import hotify from 'hotify'
+import hotify from './hotify'
 
 function sayHi(): void {
 	let x = 1
-	console.log('foobar!')
+	console.log('foobara!')
 }
 
-sayHi()
 
 function foo(bar?: number) {
 
@@ -18,4 +17,8 @@ function foo2(bar: string | undefined) {
 
 }
 
-foo2();
+function main(): void {
+	sayHi();
+}
+
+hotify(main);

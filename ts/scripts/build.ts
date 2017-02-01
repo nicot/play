@@ -2,22 +2,20 @@ import * as browserify from 'browserify'
 import * as tsify from 'tsify'
 import * as watchify from 'watchify'
 import * as fs from 'fs'
-// import hotify from 'hotify'
 
 function dirname(path: string): string {
 	return `${__dirname}/../${path}`
 }
 
 let b = browserify({
-	entries: [dirname('src/main.ts'), dirname('src/hotify.ts')],
+	entries: [dirname('src/main.ts')],
 	cache: {},
 	packageCache: {},
 	debug: true,
 })
 
-b.plugin(tsify, { noImplicitAny: true })
+b.plugin(tsify, { project: "../." })
 b.plugin(watchify)
-// b.plugin(hotify)
 
 function error(error) {
 	console.error(error.toString())

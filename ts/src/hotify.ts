@@ -1,11 +1,6 @@
-import * as browserify from 'browserify'
+const wsurl = "ws://localhost:6347"
 
-interface Options {
-
-}
-
-export default function(b: browserify.BrowserifyObject, opts: Options) {
-	console.log(opts)
-	console.log(b)
-	return b
+export default function(main: () => void): void {
+	let socket = new WebSocket(wsurl);
+	main()
 }

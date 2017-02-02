@@ -2,7 +2,7 @@ import hotify from './hotify'
 
 function sayHi(): void {
 	let x = 1
-	console.log('foobara!')
+	console.log('the freaking coolest!')
 }
 
 
@@ -21,4 +21,4 @@ function main(): void {
 	sayHi();
 }
 
-hotify(main);
+hotify(main)

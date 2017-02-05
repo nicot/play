@@ -1,0 +1,29 @@
+html {
+	/*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+	margin: 24px;
+}
+
+.name {
+	text-transform: uppercase;
+	flex: 1 0 auto;
+	margin: 0;
+}
+
+.hero {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+h2 {
+	margin-top: 24px;
+	text-transform: uppercase;
+}
+
+.section {
+	margin-bottom: 24px;
+}
+
+.contact {
+	margin: 0 12px;
+}

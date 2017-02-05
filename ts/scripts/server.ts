@@ -87,7 +87,7 @@ class Emitter implements NodeJS.EventEmitter {
 	}
 }
 
-class WSPiper extends Emitter implements NodeJS.WritableStream{
+class WSPiper extends Emitter implements NodeJS.WritableStream {
 	constructor(
 		private conn: WS.connection,
 	) {
@@ -106,26 +106,28 @@ class WSPiper extends Emitter implements NodeJS.WritableStream{
 		if (buffer) {
 			this.write(buffer)
 		}
-		const value: HMRMSG = {
+		let value: HMRMSG = {
 			kind: "soft",
 			reload: "hot",
 			code: this.code,
 		}
-		const message = JSON.stringify(value)
+		let message = JSON.stringify(value)
 		this.conn.send(message)
 	}
-
 }
 
-const reload = (conn: WS.connection, b: BrowserifyObject) => () => {
-	const acc = new WSPiper(conn)
-	b.bundle()
-		.on('error', error)
+let reload = (conn: WS.connection, b: BrowserifyObject) => () => {
+	let acc = new WSPiper(conn)
+	let path = dirname('out/bundle.js');
+	let outstream = createWriteStream(path);
+	let stream = b.bundle()
+	stream.on('error', error)
 		.pipe(acc)
+	stream.pipe(outstream)
 }
 
-const handleWS = (b: BrowserifyObject) => (request: WS.request) => {
-	var connection = request.accept();
+let handleWS = (b: BrowserifyObject) => (request: WS.request) => {
+	let connection = request.accept();
 	console.log((new Date()) + ' Connection accepted.');
 	b.on('update', reload(connection, b))
 }

@@ -1,4 +1,5 @@
 import hotify from './hotify'
+import start from './render'
 
 function sayHi(): void {
 	let x = 1
@@ -18,7 +19,8 @@ function foo2(bar: string | undefined) {
 }
 
 function main(): void {
-	sayHi();
+	sayHi()
+	start()
 }
 
 hotify(main)

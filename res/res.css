@@ -21,7 +21,7 @@ h2 {
 }
 
 .section {
-	padding: 0 12px 12px 12px;
+	padding: 0 0 12px 12px;
 }
 
 .address {
@@ -38,7 +38,7 @@ h2 {
 	justify-content: space-between;
 }
 
-h3 {
+h4 {
 	margin: 0;
 }
 
@@ -46,6 +46,7 @@ ul {
 	margin-top: 0;
 }
 
-td {
+td:first-child {
 	padding-right: 12px;
+	font-weight: bold;
 }

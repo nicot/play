@@ -1,5 +1,10 @@
 package guru
 
+import (
+	"fmt"
+	"strings"
+)
+
 type TokenType int
 
 const (
@@ -15,44 +20,45 @@ type Token struct {
 	Value interface{}
 }
 
+const delims = " \t\n\r()" // TODO: unicode whitespace
+
 func Read(input string) []Token {
+	var pos int
 	var tokens []Token
-	var context string
-	var num string
-	var inString bool
-	for _, v := range input {
-		var t Token
-
-		if inString {
-			if v == '"' {
-				t = Token{String, context}
-				inString = false
+	for pos < len(input) {
+		char := input[pos]
+		if char == '(' {
+			tokens = append(tokens, Token{Delimiter, "open"})
+			pos++
+		} else if char == ')' {
+			tokens = append(tokens, Token{Delimiter, "close"})
+			pos++
+		} else if char == '"' {
+			stop := strings.IndexByte(input[pos:], '"')
+			if stop == -1 {
+				tokens = append(tokens, Token{Error, nil})
+				pos++
 			} else {
-				context += string(v)
+				stop = pos + stop
+				s := input[pos:stop]
+				tokens = append(tokens, Token{String, s})
+				pos = stop + 1
 			}
-		} else if v == '(' {
-			t = Token{Delimiter, "open"}
-		} else if v == ')' {
-			t = Token{Delimiter, "close"}
-		} else if v == ' ' {
-
-		} else if v > '0' && v <= '9' {
-			num += string(v)
-			continue
-		} else if v == '"' {
-			inString = true
+		} else if strings.IndexRune(delims, rune(char)) == -1 {
+			stop := strings.IndexAny(input[pos:], delims)
+			if stop == -1 {
+				tokens = append(tokens, Token{Error, nil})
+				pos++
+			} else {
+				stop = pos + stop
+				s := input[pos:stop]
+				tokens = append(tokens, Token{Symbol, s})
+				pos = stop
+			}
 		} else {
-			t = Symbol{Error, nil}
+			pos++
 		}
-
-		if num != "" {
-			c := Token{Number, num}
-			tokens = append(tokens, c)
-			num = ""
-		}
-		if t != (Token{}) {
-			tokens = append(tokens, t)
-		}
+		fmt.Println(string(char), tokens)
 	}
 	return tokens
 }

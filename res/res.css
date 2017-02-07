@@ -1,6 +1,6 @@
 html {
-	/*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 	margin: 24px;
+	font-family: "Computer Modern Serif", serif;
 }
 
 .name {
@@ -12,7 +12,7 @@ html {
 .hero {
 	display: flex;
 	justify-content: space-between;
-	padding-bottom: 12px;
+	padding-bottom: 8px;
 }
 
 h2 {
@@ -21,7 +21,8 @@ h2 {
 }
 
 .section {
-	padding: 0 0 12px 12px;
+	padding-left: 12px;
+	margin-bottom: 12px;
 }
 
 .address {
@@ -38,15 +39,16 @@ h2 {
 	justify-content: space-between;
 }
 
-h4 {
-	margin: 0;
-}
-
 ul {
-	margin-top: 0;
+	margin: 2px 0 8px 0;
+	list-style-type: circle;
 }
 
 td:first-child {
 	padding-right: 12px;
 	font-weight: bold;
+}
+
+hr {
+	margin: 2px 0 4px 0;
 }

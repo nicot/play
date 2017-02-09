@@ -1,7 +1,5 @@
 package guru
 
-import "fmt"
-
 type Node struct {
 	// Either
 	Token    *Token
@@ -17,7 +15,6 @@ func Parse(tokens []Token) Node {
 }
 
 func ParsePartial(tokens []Token) (*Node, []Token) {
-	fmt.Println(tokens)
 	token := tokens[0]
 	tokens = tokens[1:]
 	if token == (Token{Delimiter, "close"}) {

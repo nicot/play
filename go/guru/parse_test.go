@@ -11,9 +11,9 @@ func TestParse1(t *testing.T) {
 	}}
 
 	tree := Parse(tokens)
-	t.Error(tree.Equals(exTree))
-	t.Error(tree)
-	t.Error(exTree)
+	if !tree.Equals(exTree) {
+		t.Errorf("Expected tree %v to be %v", tree, exTree)
+	}
 }
 
 func TestParse2(t *testing.T) {
@@ -22,12 +22,17 @@ func TestParse2(t *testing.T) {
 		{&Token{Symbol, "+"}, nil},
 		{&Token{Number, 1}, nil},
 		{&Token{Number, 2}, nil},
+		{nil, []Node{
+			{&Token{Symbol, "+"}, nil},
+			{&Token{Number, 2}, nil},
+			{&Token{Number, 3}, nil},
+		}},
 	}}
 
 	tree := Parse(tokens)
-	t.Error(tree.Equals(exTree))
-	t.Error(tree)
-	t.Error(exTree)
+	if !tree.Equals(exTree) {
+		t.Errorf("Expected tree %v to be %v", tree, exTree)
+	}
 }
 
 func TestTreeEquals(t *testing.T) {

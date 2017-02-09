@@ -1,7 +1,7 @@
 package guru
 
 import (
-	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -34,6 +34,7 @@ func Read(input string) []Token {
 			tokens = append(tokens, Token{Delimiter, "close"})
 			pos++
 		} else if char == '"' {
+			pos++
 			stop := strings.IndexByte(input[pos:], '"')
 			if stop == -1 {
 				tokens = append(tokens, Token{Error, nil})
@@ -52,13 +53,17 @@ func Read(input string) []Token {
 			} else {
 				stop = pos + stop
 				s := input[pos:stop]
-				tokens = append(tokens, Token{Symbol, s})
+				n, err := strconv.Atoi(s)
+				if err != nil {
+					tokens = append(tokens, Token{Symbol, s})
+				} else {
+					tokens = append(tokens, Token{Number, n})
+				}
 				pos = stop
 			}
 		} else {
 			pos++
 		}
-		fmt.Println(string(char), tokens)
 	}
 	return tokens
 }

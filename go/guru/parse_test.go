@@ -60,3 +60,20 @@ func TestTreeEquals(t *testing.T) {
 		t.Errorf("%v shouldn't equal %v", tree1, tree3)
 	}
 }
+
+func TestParse3(t *testing.T) {
+	exTree := Node{nil, []Node{
+		{&Token{Symbol, "+"}, nil},
+		{nil, []Node{
+			{&Token{Symbol, "+"}, nil},
+			{&Token{Number, 2}, nil},
+			{&Token{Number, 3}, nil},
+		}},
+		{&Token{Number, 2}, nil},
+	}}
+
+	tree := Parse("(+ (+ 2 3) 2)")
+	if !tree.Equals(exTree) {
+		t.Errorf("Expected tree %v to be %v", tree, exTree)
+	}
+}

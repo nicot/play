@@ -24,10 +24,11 @@ func ParsePartial(tokens []Token) (*Node, []Token) {
 		var children []Node
 		for {
 			node, rest := ParsePartial(tokens)
-			tokens = rest
-			if node != nil {
-				children = append(children, *node)
+			if node == nil {
+				return &Node{nil, children}, rest
 			}
+			tokens = rest
+			children = append(children, *node)
 			if len(tokens) == 0 {
 				return &Node{nil, children}, nil
 			}

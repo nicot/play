@@ -6,7 +6,8 @@ type Node struct {
 	Children []Node
 }
 
-func Parse(tokens []Token) Node {
+func Parse(input string) Node {
+	tokens := Lex(input)
 	node, _ := ParsePartial(tokens)
 	if node == nil {
 		return Node{}

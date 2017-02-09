@@ -3,21 +3,19 @@ package guru
 import "testing"
 
 func TestParse1(t *testing.T) {
-	tokens := Lex("(+ 1 2)")
 	exTree := Node{nil, []Node{
 		{&Token{Symbol, "+"}, nil},
 		{&Token{Number, 1}, nil},
 		{&Token{Number, 2}, nil},
 	}}
 
-	tree := Parse(tokens)
+	tree := Parse("(+ 1 2)")
 	if !tree.Equals(exTree) {
 		t.Errorf("Expected tree %v to be %v", tree, exTree)
 	}
 }
 
 func TestParse2(t *testing.T) {
-	tokens := Lex("(+ 1 2 (+ 2 3))")
 	exTree := Node{nil, []Node{
 		{&Token{Symbol, "+"}, nil},
 		{&Token{Number, 1}, nil},
@@ -29,7 +27,7 @@ func TestParse2(t *testing.T) {
 		}},
 	}}
 
-	tree := Parse(tokens)
+	tree := Parse("(+ 1 2 (+ 2 3))")
 	if !tree.Equals(exTree) {
 		t.Errorf("Expected tree %v to be %v", tree, exTree)
 	}

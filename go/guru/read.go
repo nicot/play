@@ -67,3 +67,23 @@ func Read(input string) []Token {
 	}
 	return tokens
 }
+
+func (t Token) String() string {
+	switch t.Type {
+	case Delimiter:
+		if t.Value == "open" {
+			return "("
+		} else if t.Value == "close" {
+			return ")"
+		}
+	case String:
+		return "\"" + t.Value.(string) + "\""
+	case Number:
+		return strconv.Itoa(t.Value.(int))
+	case Symbol:
+		return t.Value.(string)
+	case Error:
+		return "Error"
+	}
+	panic("unreachable")
+}

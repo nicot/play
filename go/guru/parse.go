@@ -60,4 +60,17 @@ func (n Node) Equals(n2 Node) bool {
 	return e
 }
 
-func (n Node)
+func (n Node) String() string {
+	if n.Token != nil {
+		return n.Token.String()
+	}
+	s := "("
+	for i, v := range n.Children {
+		c := " "
+		if i == len(n.Children)-1 {
+			c = ""
+		}
+		s += v.String() + c
+	}
+	return s + ")"
+}

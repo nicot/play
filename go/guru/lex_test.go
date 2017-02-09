@@ -4,9 +4,9 @@ import (
 	"testing"
 )
 
-func TestRead1(t *testing.T) {
+func TestLex1(t *testing.T) {
 	s := "(+ 1 2)"
-	tokens := Read(s)
+	tokens := Lex(s)
 	expectedTokens := []Token{
 		{Delimiter, "open"},
 		{Symbol, "+"},
@@ -21,9 +21,9 @@ func TestRead1(t *testing.T) {
 	}
 }
 
-func TestRead2(t *testing.T) {
+func TestLex2(t *testing.T) {
 	s := `(append "foo" 2)`
-	tokens := Read(s)
+	tokens := Lex(s)
 	expectedTokens := []Token{
 		{Delimiter, "open"},
 		{Symbol, "append"},
@@ -38,9 +38,9 @@ func TestRead2(t *testing.T) {
 	}
 }
 
-func TestRead3(t *testing.T) {
+func TestLex3(t *testing.T) {
 	s := `(append "foo" (+ 12 2))`
-	tokens := Read(s)
+	tokens := Lex(s)
 	expectedTokens := []Token{
 		{Delimiter, "open"},
 		{Symbol, "append"},

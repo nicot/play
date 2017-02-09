@@ -22,7 +22,7 @@ type Token struct {
 
 const delims = " \t\n\r()" // TODO: unicode whitespace
 
-func Read(input string) []Token {
+func Lex(input string) []Token {
 	var pos int
 	var tokens []Token
 	for pos < len(input) {

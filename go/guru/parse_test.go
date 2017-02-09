@@ -3,7 +3,7 @@ package guru
 import "testing"
 
 func TestParse1(t *testing.T) {
-	tokens := Read("(+ 1 2)")
+	tokens := Lex("(+ 1 2)")
 	exTree := Node{nil, []Node{
 		{&Token{Symbol, "+"}, nil},
 		{&Token{Number, 1}, nil},
@@ -17,7 +17,7 @@ func TestParse1(t *testing.T) {
 }
 
 func TestParse2(t *testing.T) {
-	tokens := Read("(+ 1 2 (+ 2 3))")
+	tokens := Lex("(+ 1 2 (+ 2 3))")
 	exTree := Node{nil, []Node{
 		{&Token{Symbol, "+"}, nil},
 		{&Token{Number, 1}, nil},

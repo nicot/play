@@ -34,7 +34,7 @@ func TestEval3(t *testing.T) {
 
 func TestEval4(t *testing.T) {
 	e := Parse("(+ (+ 1 2) (+ 7 8))")
-	v := Value{TNumber, 12}
+	v := Value{TNumber, 18}
 
 	c := Eval(e)
 	if c != v {

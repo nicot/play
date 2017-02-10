@@ -3,10 +3,24 @@ package guru
 import "testing"
 
 func TestFlatten1(t *testing.T) {
+	e := Parse("(+ 1 2)")
 
+	c := Flatten(e)
+
+	v := ByteCode{
+		FlatExpr{
+			Value{TSymbol, "+"},
+			[]Value{{TNumber, 1}, {TNumber, 2}},
+		},
+	}
+
+	if !c.Equals(v) {
+		t.Errorf("Expected %v, got %v", c, v)
+	}
 }
 
 func TestFlatten2(t *testing.T) {
+	t.Skip()
 	e := Parse("(if true 1 2)")
 
 	f := Flatten(e)
@@ -19,14 +33,15 @@ func TestFlatten2(t *testing.T) {
 }
 
 func TestFlattenLazy(t *testing.T) {
+	t.Skip()
 	e := Parse("(if true (print 2) (print 3))")
 
 	c := Flatten(e)
 
 	v := ByteCode{
 		FlatExpr{
-			Value{},
-			[]Value{},
+			Value{TSymbol, "+"},
+			[]Value{{TNumber, 1}, {TNumber, 2}},
 		},
 	}
 

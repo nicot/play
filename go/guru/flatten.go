@@ -54,5 +54,12 @@ func (b ByteCode) Equals(b2 ByteCode) bool {
 }
 
 func Flatten(node Node) ByteCode {
-	return nil
+	if node.Value != nil {
+		panic("idk")
+	}
+
+	// for _, v := range node.Children {
+
+	// }
+	return ByteCode{}
 }

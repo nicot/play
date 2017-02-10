@@ -2,7 +2,7 @@ package guru
 
 type Node struct {
 	// Either
-	Token    *Token
+	Value    *Value
 	Children []Node
 }
 
@@ -34,12 +34,13 @@ func ParsePartial(tokens []Token) (*Node, []Token) {
 			}
 		}
 	}
-	return &Node{&token, nil}, tokens
+	v := TokenToValue(token)
+	return &Node{&v, nil}, tokens
 }
 
 func (n Node) Equals(n2 Node) bool {
-	if n.Token != nil && n2.Token != nil {
-		if *n.Token != *n2.Token {
+	if n.Value != nil && n2.Value != nil {
+		if *n.Value != *n2.Value {
 			return false
 		}
 	}
@@ -60,8 +61,8 @@ func (n Node) Equals(n2 Node) bool {
 }
 
 func (n Node) String() string {
-	if n.Token != nil {
-		return n.Token.String()
+	if n.Value != nil {
+		return n.Value.String()
 	}
 	s := "("
 	for i, v := range n.Children {

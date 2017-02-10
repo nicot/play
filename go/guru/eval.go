@@ -19,7 +19,7 @@ type Value struct {
 	Value interface{}
 }
 
-func ConvertValue(token Token) Value {
+func TokenToValue(token Token) Value {
 	switch token.Type {
 	case Number:
 		return Value{TNumber, token.Value.(int)}
@@ -44,8 +44,8 @@ func (v Value) String() string {
 }
 
 func EvalRec(node Node) Value {
-	if node.Token != nil {
-		return ConvertValue(*node.Token)
+	if node.Value != nil {
+		return *node.Value
 	}
 	nodes := node.Children
 	if len(nodes) < 1 {

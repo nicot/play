@@ -1,10 +1,16 @@
 package guru
 
+import (
+	"strconv"
+)
+
 type Type int
 
 const (
 	TNumber Type = iota
 	TString
+
+	// TSymbol can be user defined or a builtin. It can be eager or lazy.
 	TSymbol
 )
 
@@ -25,7 +31,19 @@ func ConvertValue(token Token) Value {
 	panic("unreachable")
 }
 
-func Eval(node Node) Value {
+func (v Value) String() string {
+	switch v.Type {
+	case TNumber:
+		return strconv.Itoa(v.Value.(int))
+	case TString:
+		return "\"" + v.Value.(string) + "\""
+	case TSymbol:
+		return v.Value.(string)
+	}
+	panic("unreachable")
+}
+
+func EvalRec(node Node) Value {
 	if node.Token != nil {
 		return ConvertValue(*node.Token)
 	}
@@ -33,7 +51,7 @@ func Eval(node Node) Value {
 	if len(nodes) < 1 {
 		panic("Not enough nodes")
 	}
-	f := Eval(nodes[0])
+	f := EvalRec(nodes[0])
 	if f.Type != TSymbol {
 		panic("Expected symbol in call position")
 	}
@@ -42,7 +60,16 @@ func Eval(node Node) Value {
 	// bad
 
 	if sym == "+" {
-		return Value{TNumber, Eval(nodes[1]).Value.(int) + Eval(nodes[2]).Value.(int)}
+		return Value{TNumber, EvalRec(nodes[1]).Value.(int) + EvalRec(nodes[2]).Value.(int)}
 	}
+	return Value{}
+}
+
+func Eval(node Node) Value {
+	byteCode := Flatten(node)
+	return EvalFlat(byteCode)
+}
+
+func EvalFlat(f []FlatExpr) Value {
 	return Value{}
 }

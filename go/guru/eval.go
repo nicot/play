@@ -70,6 +70,6 @@ func Eval(node Node) Value {
 	return EvalFlat(byteCode)
 }
 
-func EvalFlat(f []FlatExpr) Value {
+func EvalFlat(f FlatExprs) Value {
 	return Value{}
 }

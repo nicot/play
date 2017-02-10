@@ -53,11 +53,12 @@ func (n Node) Equals(n2 Node) bool {
 		return true
 	}
 
-	e := true
 	for i := range n.Children {
-		e = e && n.Children[i].Equals(n2.Children[i])
+		if !n.Children[i].Equals(n2.Children[i]) {
+			return false
+		}
 	}
-	return e
+	return true
 }
 
 func (n Node) String() string {

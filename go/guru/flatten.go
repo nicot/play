@@ -1,65 +1,47 @@
 package guru
 
-type FlatExpr struct {
-	Operation Value
-	Arguments []Value
-}
+type FlatExprs [][]Value
 
-func (f FlatExpr) String() string {
-	s := f.Operation.String()
-	for _, a := range f.Arguments {
-		s += " " + a.String()
-	}
-	return s
-}
-
-func (f FlatExpr) Equals(f1 FlatExpr) bool {
-	if f.Operation != f1.Operation {
-		return false
-	}
-
-	if len(f.Arguments) != len(f1.Arguments) {
-		return false
-	}
-
-	t := true
-	for i := range f.Arguments {
-		t = t && f.Arguments[i] == f1.Arguments[i]
-	}
-
-	return t
-}
-
-type ByteCode []FlatExpr
-
-func (b ByteCode) String() string {
+func (f FlatExprs) String() string {
 	s := "["
-	for _, f := range b {
-		s += "\n" + f.String()
+	for _, l := range f {
+		for _, v := range l {
+			s += v.String() + " "
+		}
 	}
 	return s + "\n]"
 }
 
-func (b ByteCode) Equals(b2 ByteCode) bool {
-	if len(b) != len(b2) {
+func (f FlatExprs) Equals(f1 FlatExprs) bool {
+	if len(f) != len(f1) {
 		return false
 	}
 
 	t := true
-	for i := range b {
-		t = t && b[i].Equals(b2[i])
+	for i := range f {
+		if len(f[i]) != len(f1[i]) {
+			return false
+		}
+		for j := range f[i] {
+			if f[i][j] != f1[i][j] {
+				return false
+			}
+		}
 	}
 
 	return t
 }
 
-func Flatten(node Node) ByteCode {
+func Flatten(node Node) FlatExprs {
 	if node.Value != nil {
 		panic("idk")
 	}
 
-	// for _, v := range node.Children {
+	for i, v := range node.Children {
+		if v.Value != nil {
 
-	// }
-	return ByteCode{}
+		}
+	}
+
+	return FlatExprs{}
 }

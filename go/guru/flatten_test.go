@@ -11,6 +11,7 @@ func TestFlatten1(t *testing.T) {
 		[]Value{{Symbol, "+"}, {Number, 1}, {Number, 2}},
 	}
 
+	t.Error(c)
 	if !c.Equals(v) {
 		t.Errorf("Expected %v, got %v", c, v)
 	}

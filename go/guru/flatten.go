@@ -5,6 +5,7 @@ type FlatExprs [][]Value
 func (f FlatExprs) String() string {
 	s := "["
 	for _, l := range f {
+		s += "\n"
 		for _, v := range l {
 			s += v.String() + " "
 		}
@@ -37,11 +38,17 @@ func Flatten(node Node) FlatExprs {
 		panic("idk")
 	}
 
-	for i, v := range node.Children {
+	var stmts FlatExprs
+	stmts = append(stmts, []Value{})
+	i := 0
+	for {
+		v := node.Children[i]
 		if v.Value != nil {
-
+			stmts[0] = append(stmts[0], *v.Value)
+		}
+		i++
+		if len(node.Children) == i {
+			return stmts
 		}
 	}
-
-	return FlatExprs{}
 }

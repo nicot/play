@@ -12,6 +12,9 @@ const (
 
 	// TSymbol can be user defined or a builtin. It can be eager or lazy.
 	Symbol
+
+	// SSA is a special type that a user can't create.
+	SSA
 )
 
 type Value struct {
@@ -39,6 +42,8 @@ func (v Value) String() string {
 		return "\"" + v.Value.(string) + "\""
 	case Symbol:
 		return v.Value.(string)
+	case SSA:
+		return "#" + strconv.Itoa(v.Value.(int))
 	}
 	panic("unreachable")
 }
@@ -66,7 +71,7 @@ func EvalRec(node Node) Value {
 }
 
 func Eval(node Node) Value {
-	byteCode := Flatten(node)
+	byteCode, _ := Flatten(node)
 	return EvalFlat(byteCode)
 }
 

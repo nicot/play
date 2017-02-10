@@ -1,5 +1,9 @@
 package guru
 
+import (
+	"fmt"
+)
+
 type FlatExprs [][]Value
 
 func (f FlatExprs) String() string {
@@ -33,22 +37,31 @@ func (f FlatExprs) Equals(f1 FlatExprs) bool {
 	return t
 }
 
-func Flatten(node Node) FlatExprs {
+// Danger: recursive
+func Flatten(node Node) (FlatExprs, *Value) {
 	if node.Value != nil {
-		panic("idk")
+		return nil, node.Value
 	}
 
-	var stmts FlatExprs
-	stmts = append(stmts, []Value{})
-	i := 0
-	for {
-		v := node.Children[i]
-		if v.Value != nil {
-			stmts[0] = append(stmts[0], *v.Value)
-		}
-		i++
-		if len(node.Children) == i {
-			return stmts
+	var prog FlatExprs
+	var stmt []Value
+	var ret *Value
+	for _, v := range node.Children {
+		f, v := Flatten(v)
+		if f != nil {
+			if len(f) > 1 {
+				fmt.Println(f)
+				prog = append(prog, f[0:]...)
+			}
+			binding := Value{SSA, 0}
+			asn := append([]Value{{Symbol, "assign"}, binding}, f[0]...)
+			prog = append(prog, asn)
+			stmt = append(stmt, binding)
+		} else {
+			stmt = append(stmt, *v)
 		}
 	}
+
+	prog = append(prog, stmt)
+	return prog, ret
 }

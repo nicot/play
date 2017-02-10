@@ -9,8 +9,8 @@ func TestFlatten1(t *testing.T) {
 
 	v := ByteCode{
 		FlatExpr{
-			Value{TSymbol, "+"},
-			[]Value{{TNumber, 1}, {TNumber, 2}},
+			Value{Symbol, "+"},
+			[]Value{{Number, 1}, {Number, 2}},
 		},
 	}
 
@@ -40,8 +40,8 @@ func TestFlattenLazy(t *testing.T) {
 
 	v := ByteCode{
 		FlatExpr{
-			Value{TSymbol, "+"},
-			[]Value{{TNumber, 1}, {TNumber, 2}},
+			Value{Symbol, "+"},
+			[]Value{{Number, 1}, {Number, 2}},
 		},
 	}
 

@@ -8,11 +8,11 @@ import (
 type TokenType int
 
 const (
-	Delimiter TokenType = iota
-	String
-	Number
-	Symbol
-	Error
+	Error TokenType = iota
+	Delimiter
+	TString
+	TNumber
+	TSymbol
 )
 
 type Token struct {
@@ -42,7 +42,7 @@ func Lex(input string) []Token {
 			} else {
 				stop = pos + stop
 				s := input[pos:stop]
-				tokens = append(tokens, Token{String, s})
+				tokens = append(tokens, Token{TString, s})
 				pos = stop + 1
 			}
 		} else if strings.IndexRune(delims, rune(char)) == -1 {
@@ -55,9 +55,9 @@ func Lex(input string) []Token {
 				s := input[pos:stop]
 				n, err := strconv.Atoi(s)
 				if err != nil {
-					tokens = append(tokens, Token{Symbol, s})
+					tokens = append(tokens, Token{TSymbol, s})
 				} else {
-					tokens = append(tokens, Token{Number, n})
+					tokens = append(tokens, Token{TNumber, n})
 				}
 				pos = stop
 			}
@@ -76,11 +76,11 @@ func (t Token) String() string {
 		} else if t.Value == "close" {
 			return ")"
 		}
-	case String:
+	case TString:
 		return "\"" + t.Value.(string) + "\""
-	case Number:
+	case TNumber:
 		return strconv.Itoa(t.Value.(int))
-	case Symbol:
+	case TSymbol:
 		return t.Value.(string)
 	case Error:
 		return "Error"

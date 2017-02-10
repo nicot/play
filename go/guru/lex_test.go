@@ -9,9 +9,9 @@ func TestLex1(t *testing.T) {
 	tokens := Lex(s)
 	expectedTokens := []Token{
 		{Delimiter, "open"},
-		{Symbol, "+"},
-		{Number, 1},
-		{Number, 2},
+		{TSymbol, "+"},
+		{TNumber, 1},
+		{TNumber, 2},
 		{Delimiter, "close"},
 	}
 	for i, v := range expectedTokens {
@@ -26,9 +26,9 @@ func TestLex2(t *testing.T) {
 	tokens := Lex(s)
 	expectedTokens := []Token{
 		{Delimiter, "open"},
-		{Symbol, "append"},
-		{String, "foo"},
-		{Number, 2},
+		{TSymbol, "append"},
+		{TString, "foo"},
+		{TNumber, 2},
 		{Delimiter, "close"},
 	}
 	for i, v := range expectedTokens {
@@ -43,12 +43,12 @@ func TestLex3(t *testing.T) {
 	tokens := Lex(s)
 	expectedTokens := []Token{
 		{Delimiter, "open"},
-		{Symbol, "append"},
-		{String, "foo"},
+		{TSymbol, "append"},
+		{TString, "foo"},
 		{Delimiter, "open"},
-		{Symbol, "+"},
-		{Number, 12},
-		{Number, 2},
+		{TSymbol, "+"},
+		{TNumber, 12},
+		{TNumber, 2},
 		{Delimiter, "close"},
 		{Delimiter, "close"},
 	}

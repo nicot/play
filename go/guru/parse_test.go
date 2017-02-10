@@ -4,9 +4,9 @@ import "testing"
 
 func TestParse1(t *testing.T) {
 	exTree := Node{nil, []Node{
-		{&Value{TSymbol, "+"}, nil},
-		{&Value{TNumber, 1}, nil},
-		{&Value{TNumber, 2}, nil},
+		{&Value{Symbol, "+"}, nil},
+		{&Value{Number, 1}, nil},
+		{&Value{Number, 2}, nil},
 	}}
 
 	tree := Parse("(+ 1 2)")
@@ -17,13 +17,13 @@ func TestParse1(t *testing.T) {
 
 func TestParse2(t *testing.T) {
 	exTree := Node{nil, []Node{
-		{&Value{TSymbol, "+"}, nil},
-		{&Value{TNumber, 1}, nil},
-		{&Value{TNumber, 2}, nil},
+		{&Value{Symbol, "+"}, nil},
+		{&Value{Number, 1}, nil},
+		{&Value{Number, 2}, nil},
 		{nil, []Node{
-			{&Value{TSymbol, "+"}, nil},
-			{&Value{TNumber, 2}, nil},
-			{&Value{TNumber, 3}, nil},
+			{&Value{Symbol, "+"}, nil},
+			{&Value{Number, 2}, nil},
+			{&Value{Number, 3}, nil},
 		}},
 	}}
 
@@ -35,14 +35,14 @@ func TestParse2(t *testing.T) {
 
 func TestTreeEquals(t *testing.T) {
 	tree1 := Node{nil, []Node{
-		{&Value{TSymbol, "+"}, nil},
-		{&Value{TNumber, 1}, nil},
-		{&Value{TNumber, 2}, nil},
+		{&Value{Symbol, "+"}, nil},
+		{&Value{Number, 1}, nil},
+		{&Value{Number, 2}, nil},
 	}}
 	tree2 := Node{nil, []Node{
-		{&Value{TSymbol, "+"}, nil},
-		{&Value{TNumber, 1}, nil},
-		{&Value{TNumber, 2}, nil},
+		{&Value{Symbol, "+"}, nil},
+		{&Value{Number, 1}, nil},
+		{&Value{Number, 2}, nil},
 	}}
 	f := tree1.Equals(tree2)
 	if !f {
@@ -50,9 +50,9 @@ func TestTreeEquals(t *testing.T) {
 	}
 
 	tree3 := Node{nil, []Node{
-		{&Value{TSymbol, "-"}, nil},
-		{&Value{TNumber, 1}, nil},
-		{&Value{TNumber, 2}, nil},
+		{&Value{Symbol, "-"}, nil},
+		{&Value{Number, 1}, nil},
+		{&Value{Number, 2}, nil},
 	}}
 
 	f = tree1.Equals(tree3)
@@ -63,13 +63,13 @@ func TestTreeEquals(t *testing.T) {
 
 func TestParse3(t *testing.T) {
 	exTree := Node{nil, []Node{
-		{&Value{TSymbol, "+"}, nil},
+		{&Value{Symbol, "+"}, nil},
 		{nil, []Node{
-			{&Value{TSymbol, "+"}, nil},
-			{&Value{TNumber, 2}, nil},
-			{&Value{TNumber, 3}, nil},
+			{&Value{Symbol, "+"}, nil},
+			{&Value{Number, 2}, nil},
+			{&Value{Number, 3}, nil},
 		}},
-		{&Value{TNumber, 2}, nil},
+		{&Value{Number, 2}, nil},
 	}}
 
 	tree := Parse("(+ (+ 2 3) 2)")

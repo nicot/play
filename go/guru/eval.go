@@ -7,11 +7,11 @@ import (
 type Type int
 
 const (
-	TNumber Type = iota
-	TString
+	Number Type = iota
+	String
 
 	// TSymbol can be user defined or a builtin. It can be eager or lazy.
-	TSymbol
+	Symbol
 )
 
 type Value struct {
@@ -21,23 +21,23 @@ type Value struct {
 
 func TokenToValue(token Token) Value {
 	switch token.Type {
-	case Number:
-		return Value{TNumber, token.Value.(int)}
-	case String:
-		return Value{TString, token.Value.(string)}
-	case Symbol:
-		return Value{TSymbol, token.Value.(string)}
+	case TNumber:
+		return Value{Number, token.Value.(int)}
+	case TString:
+		return Value{String, token.Value.(string)}
+	case TSymbol:
+		return Value{Symbol, token.Value.(string)}
 	}
 	panic("unreachable")
 }
 
 func (v Value) String() string {
 	switch v.Type {
-	case TNumber:
+	case Number:
 		return strconv.Itoa(v.Value.(int))
-	case TString:
+	case String:
 		return "\"" + v.Value.(string) + "\""
-	case TSymbol:
+	case Symbol:
 		return v.Value.(string)
 	}
 	panic("unreachable")
@@ -52,7 +52,7 @@ func EvalRec(node Node) Value {
 		panic("Not enough nodes")
 	}
 	f := EvalRec(nodes[0])
-	if f.Type != TSymbol {
+	if f.Type != Symbol {
 		panic("Expected symbol in call position")
 	}
 	sym := f.Value.(string)
@@ -60,7 +60,7 @@ func EvalRec(node Node) Value {
 	// bad
 
 	if sym == "+" {
-		return Value{TNumber, EvalRec(nodes[1]).Value.(int) + EvalRec(nodes[2]).Value.(int)}
+		return Value{Number, EvalRec(nodes[1]).Value.(int) + EvalRec(nodes[2]).Value.(int)}
 	}
 	return Value{}
 }

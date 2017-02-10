@@ -37,31 +37,36 @@ func (f FlatExprs) Equals(f1 FlatExprs) bool {
 	return t
 }
 
+const qsize int = 2 << 20
+
 // Danger: recursive
-func Flatten(node Node) (FlatExprs, *Value) {
+func Flatten(node Node) FlatExprs {
 	if node.Value != nil {
-		return nil, node.Value
+		return FlatExprs{{*node.Value}}
+	}
+
+	q := make(chan Node, qsize)
+	for _, n := range node.Children {
+		q <- n
 	}
 
 	var prog FlatExprs
+	var ssn int
 	var stmt []Value
-	var ret *Value
-	for _, v := range node.Children {
-		f, v := Flatten(v)
-		if f != nil {
-			if len(f) > 1 {
-				fmt.Println(f)
-				prog = append(prog, f[0:]...)
-			}
-			binding := Value{SSA, 0}
-			asn := append([]Value{{Symbol, "assign"}, binding}, f[0]...)
-			prog = append(prog, asn)
-			stmt = append(stmt, binding)
+	for n := range q {
+		fmt.Println(n)
+		if n.Value != nil {
+			stmt = append(stmt, *n.Value)
 		} else {
-			stmt = append(stmt, *v)
+			binding := Value{SSA, ssn}
+			for _, n := range node.Children {
+				q <- n
+			}
+			assn := []Value{{Symbol, "bind"}, binding}
+			prog = append(prog, assn)
+			stmt = append(stmt, binding)
 		}
 	}
 
-	prog = append(prog, stmt)
-	return prog, ret
+	return prog
 }

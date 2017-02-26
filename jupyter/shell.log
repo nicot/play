@@ -1,0 +1,176 @@
+2017-02-23 12:06:04 - // include directory, this will be replaced by the kernel
+2017-02-23 12:06:04 - #I "/Users/nico/Downloads/ifsharp"
+2017-02-23 12:06:04 - // load base dlls
+2017-02-23 12:06:04 - #r "IfSharp.Kernel.dll"
+2017-02-23 12:06:04 - #r "NetMQ.dll"
+2017-02-23 12:06:04 - // open the global functions and methods
+2017-02-23 12:06:04 - open IfSharp.Kernel
+2017-02-23 12:06:04 - open IfSharp.Kernel.Globals
+2017-02-23 12:06:07 - F# Interactive for F# 4.1
+2017-02-23 12:06:07 - Freely distributed under the Apache 2.0 Open Source License
+2017-02-23 12:06:07 - For help type #help;;
+2017-02-23 12:06:07 - > val it : ResizeArray<System.Type * (obj -> seq<string * string> * string)> =
+2017-02-23 12:06:07 -   seq []
+2017-02-23 12:06:07 - --> Added '/Users/nico/Downloads/ifsharp' to library include path
+2017-02-23 12:06:07 - --> Referenced '/Users/nico/Downloads/ifsharp/IfSharp.Kernel.dll' (file may be locked by F# Interactive process)
+2017-02-23 12:06:07 - --> Referenced '/Users/nico/Downloads/ifsharp/NetMQ.dll' (file may be locked by F# Interactive process)
+2017-02-23 12:06:14 - f x = 1 + x
+2017-02-23 12:06:14 - f 3
+2017-02-23 12:06:14 - ExceptionOperation failed. The error text has been printed in the error stream. To return the corresponding FSharpErrorInfo use the EvalInteractionNonThrowing, EvalScriptNonThrowing or EvalExpressionNonThrowing
+2017-02-23 12:06:14 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.commitResult[a,b] (Microsoft.FSharp.Core.FSharpChoice`2[T1,T2] res) [0x00030] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 12:06:14 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.EvalInteraction (System.String code) [0x0001a] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 12:06:14 -   at IfSharp.Kernel.IfSharpKernel.preprocessAndEval (System.String code) [0x00290] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 12:06:14 -   at IfSharp.Kernel.IfSharpKernel.executeRequest (IfSharp.Kernel.KernelMessage msg, IfSharp.Kernel.ExecuteRequest content) [0x0006f] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 12:06:19 - let f x = 1 + x
+2017-02-23 12:06:19 - f 3
+2017-02-23 12:06:43 - shutdown request
+2017-02-23 16:23:47 - // include directory, this will be replaced by the kernel
+2017-02-23 16:23:47 - #I "/Users/nico/Downloads/ifsharp"
+2017-02-23 16:23:47 - // load base dlls
+2017-02-23 16:23:47 - #r "IfSharp.Kernel.dll"
+2017-02-23 16:23:47 - #r "NetMQ.dll"
+2017-02-23 16:23:47 - // open the global functions and methods
+2017-02-23 16:23:47 - open IfSharp.Kernel
+2017-02-23 16:23:47 - open IfSharp.Kernel.Globals
+2017-02-23 16:23:51 - F# Interactive for F# 4.1
+2017-02-23 16:23:51 - Freely distributed under the Apache 2.0 Open Source License
+2017-02-23 16:23:51 - For help type #help;;
+2017-02-23 16:23:51 - > val it : ResizeArray<System.Type * (obj -> seq<string * string> * string)> =
+2017-02-23 16:23:51 -   seq []
+2017-02-23 16:23:51 - --> Added '/Users/nico/Downloads/ifsharp' to library include path
+2017-02-23 16:23:51 - --> Referenced '/Users/nico/Downloads/ifsharp/IfSharp.Kernel.dll' (file may be locked by F# Interactive process)
+2017-02-23 16:23:51 - --> Referenced '/Users/nico/Downloads/ifsharp/NetMQ.dll' (file may be locked by F# Interactive process)
+2017-02-23 16:23:55 - module PipelinesAndComposition =
+2017-02-23 16:23:55 -     /// Squares a value.
+2017-02-23 16:23:55 -     let square x = x * x
+2017-02-23 16:23:55 -     /// Adds 1 to a value.
+2017-02-23 16:23:55 -     let addOne x = x + 1
+2017-02-23 16:23:55 -     /// Tests if an integer value is odd via modulo.
+2017-02-23 16:23:55 -     let isOdd x = x % 2 <> 0
+2017-02-23 16:23:55 -     /// A list of 5 numbers.  More on lists later.
+2017-02-23 16:23:55 -     let numbers = [ 1; 2; 3; 4; 5 ]
+2017-02-23 16:23:55 -     /// Given a list of integers, it filters out the even numbers,
+2017-02-23 16:23:55 -     /// squares the resulting odds, and adds 1 to the squared odds.
+2017-02-23 16:23:55 -     let squareOddValuesAndAddOne values = 
+2017-02-23 16:23:55 -         let odds = List.filter isOdd values
+2017-02-23 16:23:55 -         let squares = List.map square odds
+2017-02-23 16:23:55 -         let result = List.map addOne squares
+2017-02-23 16:23:55 -         result
+2017-02-23 16:23:55 -     printfn "processing %A through 'squareOddValuesAndAddOne' produces: %A" numbers (squareOddValuesAndAddOne numbers)
+2017-02-23 16:23:55 -     
+2017-02-23 16:23:55 -     /// A shorter way to write 'squareOddValuesAndAddOne' is to nest each
+2017-02-23 16:23:55 -     /// sub-result into the function calls themselves.
+2017-02-23 16:23:55 -     ///
+2017-02-23 16:23:55 -     /// This makes the function much shorter, but it's difficult to see the
+2017-02-23 16:23:55 -     /// order in which the data is processed.
+2017-02-23 16:23:55 -     let squareOddValuesAndAddOneNested values = 
+2017-02-23 16:23:55 -         List.map addOne (List.map square (List.filter isOdd values))
+2017-02-23 16:23:55 -     printfn "processing %A through 'squareOddValuesAndAddOneNested' produces: %A" numbers (squareOddValuesAndAddOneNested numbers)
+2017-02-23 16:23:55 -     /// A preferred way to write 'squareOddValuesAndAddOne' is to use F# pipe operators.
+2017-02-23 16:23:55 -     /// This allows you to avoid creating intermediate results, but is much more readable
+2017-02-23 16:23:55 -     /// than nesting function calls like 'squareOddValuesAndAddOneNested'
+2017-02-23 16:23:55 -     let squareOddValuesAndAddOnePipeline values =
+2017-02-23 16:23:55 -         values
+2017-02-23 16:23:55 -         |> List.filter isOdd
+2017-02-23 16:23:55 -         |> List.map square
+2017-02-23 16:23:55 -         |> List.map addOne
+2017-02-23 16:23:55 -     printfn "processing %A through 'squareOddValuesAndAddOnePipeline' produces: %A" numbers (squareOddValuesAndAddOnePipeline numbers)
+2017-02-23 16:23:55 -     /// You can shorten 'squareOddValuesAndAddOnePipeline' by moving the second `List.map` call
+2017-02-23 16:23:55 -     /// into the first, using a Lambda Function.
+2017-02-23 16:23:55 -     ///
+2017-02-23 16:23:55 -     /// Note that pipelines are also being used inside the lambda function.  F# pipe operators
+2017-02-23 16:23:55 -     /// can be used for single values as well.  This makes them very powerful for processing data.
+2017-02-23 16:23:55 -     let squareOddValuesAndAddOneShorterPipeline values =
+2017-02-23 16:23:55 -         values
+2017-02-23 16:23:55 -         |> List.filter isOdd
+2017-02-23 16:23:55 -         |> List.map(fun x -> x |> square |> addOne)
+2017-02-23 16:23:55 -     printfn "processing %A through 'squareOddValuesAndAddOneShorterPipeline' produces: %A" numbers (squareOddValuesAndAddOneShorterPipeline numbers)
+2017-02-23 16:23:55 -     /// Lastly, you can eliminate the need to explicitly take 'values' in as a parameter by using '>>'
+2017-02-23 16:23:55 -     /// to compose the two core operations: filtering out even numbers, then squaring and adding one.
+2017-02-23 16:23:55 -     /// Likewise, the 'fun x -> ...' bit of the lambda expression is also not needed, because 'x' is simply
+2017-02-23 16:23:55 -     /// being defined in that scope so that it can be passed to a functional pipeline.  Thus, '>>' can be used
+2017-02-23 16:23:55 -     /// there as well.
+2017-02-23 16:23:55 -     ///
+2017-02-23 16:23:55 -     /// The result of 'squareOddValuesAndAddOneComposition' is itself another function which takes a
+2017-02-23 16:23:55 -     /// list of integers as its input.  If you execute 'squareOddValuesAndAddOneComposition' with a list
+2017-02-23 16:23:55 -     /// of integers, you'll notice that it produces the same results as previous functions.
+2017-02-23 16:23:55 -     ///
+2017-02-23 16:23:55 -     /// This is using what is known as function composition.  This is possible because functions in F#
+2017-02-23 16:23:55 -     /// use Partial Application and the input and output types of each data processing operation match
+2017-02-23 16:23:55 -     /// the signatures of the functions we're using.
+2017-02-23 16:23:55 -     let squareOddValuesAndAddOneComposition =
+2017-02-23 16:23:55 -         List.filter isOdd >> List.map (square >> addOne)
+2017-02-23 16:23:55 -     printfn "processing %A through 'squareOddValuesAndAddOneComposition' produces: %A" numbers (squareOddValuesAndAddOneComposition numbers)
+2017-02-23 16:24:20 - square 2
+2017-02-23 16:24:20 - ExceptionOperation failed. The error text has been printed in the error stream. To return the corresponding FSharpErrorInfo use the EvalInteractionNonThrowing, EvalScriptNonThrowing or EvalExpressionNonThrowing
+2017-02-23 16:24:20 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.commitResult[a,b] (Microsoft.FSharp.Core.FSharpChoice`2[T1,T2] res) [0x00030] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:24:20 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.EvalInteraction (System.String code) [0x0001a] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:24:20 -   at IfSharp.Kernel.IfSharpKernel.preprocessAndEval (System.String code) [0x00290] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:24:20 -   at IfSharp.Kernel.IfSharpKernel.executeRequest (IfSharp.Kernel.KernelMessage msg, IfSharp.Kernel.ExecuteRequest content) [0x0006f] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:24:38 - PipelinesAndComposition.square 2
+2017-02-23 16:25:33 - [1, 2, 3] |> List.filter (fun x -> x > 1)
+2017-02-23 16:25:33 - ExceptionOperation failed. The error text has been printed in the error stream. To return the corresponding FSharpErrorInfo use the EvalInteractionNonThrowing, EvalScriptNonThrowing or EvalExpressionNonThrowing
+2017-02-23 16:25:33 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.commitResult[a,b] (Microsoft.FSharp.Core.FSharpChoice`2[T1,T2] res) [0x00030] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:25:33 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.EvalInteraction (System.String code) [0x0001a] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:25:33 -   at IfSharp.Kernel.IfSharpKernel.preprocessAndEval (System.String code) [0x00290] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:25:33 -   at IfSharp.Kernel.IfSharpKernel.executeRequest (IfSharp.Kernel.KernelMessage msg, IfSharp.Kernel.ExecuteRequest content) [0x0006f] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:26:18 - (1; 2; 3) |> List.filter (fun x -> x > 1)
+2017-02-23 16:26:18 - ExceptionOperation failed. The error text has been printed in the error stream. To return the corresponding FSharpErrorInfo use the EvalInteractionNonThrowing, EvalScriptNonThrowing or EvalExpressionNonThrowing
+2017-02-23 16:26:18 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.commitResult[a,b] (Microsoft.FSharp.Core.FSharpChoice`2[T1,T2] res) [0x00030] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:26:18 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.EvalInteraction (System.String code) [0x0001a] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:26:18 -   at IfSharp.Kernel.IfSharpKernel.preprocessAndEval (System.String code) [0x00290] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:26:18 -   at IfSharp.Kernel.IfSharpKernel.executeRequest (IfSharp.Kernel.KernelMessage msg, IfSharp.Kernel.ExecuteRequest content) [0x0006f] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:26:36 - (1; 2; 3;) |> List.filter (fun x -> x > 1)
+2017-02-23 16:26:36 - ExceptionOperation failed. The error text has been printed in the error stream. To return the corresponding FSharpErrorInfo use the EvalInteractionNonThrowing, EvalScriptNonThrowing or EvalExpressionNonThrowing
+2017-02-23 16:26:36 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.commitResult[a,b] (Microsoft.FSharp.Core.FSharpChoice`2[T1,T2] res) [0x00030] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:26:36 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.EvalInteraction (System.String code) [0x0001a] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:26:36 -   at IfSharp.Kernel.IfSharpKernel.preprocessAndEval (System.String code) [0x00290] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:26:36 -   at IfSharp.Kernel.IfSharpKernel.executeRequest (IfSharp.Kernel.KernelMessage msg, IfSharp.Kernel.ExecuteRequest content) [0x0006f] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:26:46 - [1; 2; 3;] |> List.filter (fun x -> x > 1)
+2017-02-23 16:28:59 - let f x = x + 1
+2017-02-23 16:28:59 - let g x = x ^ 2
+2017-02-23 16:28:59 - let h x = f >> g
+2017-02-23 16:28:59 - h 3
+2017-02-23 16:28:59 - ExceptionOperation failed. The error text has been printed in the error stream. To return the corresponding FSharpErrorInfo use the EvalInteractionNonThrowing, EvalScriptNonThrowing or EvalExpressionNonThrowing
+2017-02-23 16:28:59 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.commitResult[a,b] (Microsoft.FSharp.Core.FSharpChoice`2[T1,T2] res) [0x00030] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:28:59 -   at Microsoft.FSharp.Compiler.Interactive.Shell+FsiEvaluationSession.EvalInteraction (System.String code) [0x0001a] in <58000160ddab8ea7a745038360010058>:0 
+2017-02-23 16:28:59 -   at IfSharp.Kernel.IfSharpKernel.preprocessAndEval (System.String code) [0x00290] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:28:59 -   at IfSharp.Kernel.IfSharpKernel.executeRequest (IfSharp.Kernel.KernelMessage msg, IfSharp.Kernel.ExecuteRequest content) [0x0006f] in <5836f2c9f8575471a7450383c9f23658>:0 
+2017-02-23 16:29:23 - let f x = x + 1
+2017-02-23 16:29:23 - let g x = x * x
+2017-02-23 16:29:23 - let h x = f >> g
+2017-02-23 16:29:23 - h 3
+2017-02-23 16:29:36 - let f x = x + 1
+2017-02-23 16:29:36 - let g x = x * x
+2017-02-23 16:29:36 - let h = f >> g
+2017-02-23 16:29:36 - h 3
+2017-02-23 18:26:20 - shutdown request
+2017-02-23 18:29:53 - // include directory, this will be replaced by the kernel
+2017-02-23 18:29:53 - #I "/Users/nico/Downloads/ifsharp"
+2017-02-23 18:29:53 - // load base dlls
+2017-02-23 18:29:53 - #r "IfSharp.Kernel.dll"
+2017-02-23 18:29:53 - #r "NetMQ.dll"
+2017-02-23 18:29:53 - // open the global functions and methods
+2017-02-23 18:29:53 - open IfSharp.Kernel
+2017-02-23 18:29:53 - open IfSharp.Kernel.Globals
+2017-02-23 18:29:56 - F# Interactive for F# 4.1
+2017-02-23 18:29:56 - Freely distributed under the Apache 2.0 Open Source License
+2017-02-23 18:29:56 - For help type #help;;
+2017-02-23 18:29:56 - > val it : ResizeArray<System.Type * (obj -> seq<string * string> * string)> =
+2017-02-23 18:29:56 -   seq []
+2017-02-23 18:29:56 - --> Added '/Users/nico/Downloads/ifsharp' to library include path
+2017-02-23 18:29:56 - --> Referenced '/Users/nico/Downloads/ifsharp/IfSharp.Kernel.dll' (file may be locked by F# Interactive process)
+2017-02-23 18:29:56 - --> Referenced '/Users/nico/Downloads/ifsharp/NetMQ.dll' (file may be locked by F# Interactive process)
+2017-02-23 20:54:15 - let f x = x + 1
+2017-02-23 20:54:15 - let g x = x * x
+2017-02-23 20:54:15 - let h = f >> g
+2017-02-23 20:54:15 - h 3
+2017-02-23 20:54:19 - let f x = x + 1
+2017-02-23 20:54:19 - let g x = x * x
+2017-02-23 20:54:19 - let h = f >> g
+2017-02-23 20:54:19 - h 3
+2017-02-23 20:54:27 - let f x = x + 1
+2017-02-23 20:54:27 - let g x = x * x
+2017-02-23 20:54:27 - let h = f >> g
+2017-02-23 20:54:27 - h 4
+2017-02-24 11:10:06 - shutdown request

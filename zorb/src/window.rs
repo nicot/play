@@ -1,27 +1,29 @@
-extern crate gl;
-extern crate glutin;
-extern crate libc;
+extern crate gtk;
+
+use self::gtk::prelude::*;
+use self::gtk::{Button, Window, WindowType};
 
 pub fn make_window() {
-    let window = glutin::Window::new().unwrap();
-
-    unsafe { window.make_current() };
-
-    unsafe {
-        gl::load_with(|symbol| window.get_proc_address(symbol) as *const _);
-
-        gl::ClearColor(0.0, 0.0, 0.0, 1.0);
+    if gtk::init().is_err() {
+        println!("Failed to initialize GTK.");
+        return;
     }
 
-    for event in window.wait_events() {
-        unsafe {
-			gl::Clear(gl::COLOR_BUFFER_BIT)
-		};
-        window.swap_buffers();
+    let window = Window::new(WindowType::Toplevel);
+    window.set_title("First GTK+ Program");
+    window.set_default_size(350, 70);
+    let button = Button::new_with_label("Click me!");
+    window.add(&button);
+    window.show_all();
 
-        match event {
-            glutin::Event::Closed => break,
-            _ => ()
-        }
-    }
+    window.connect_delete_event(|_, _| {
+        gtk::main_quit();
+        Inhibit(false)
+    });
+
+    button.connect_clicked(|_| {
+        println!("Clicked!");
+    });
+
+    gtk::main();
 }

@@ -3,7 +3,6 @@ name = "zorb"
 version = "0.1.0"
 authors = ["Nico Tonozzi <nico@nicot.us>"]
 
-[dependencies]
-glutin = "*"
-libc = "*"
-gl = "*"
+[dependencies.gtk]
+version = "0.1.2"
+features = ["v3_10"]

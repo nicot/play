@@ -4,4 +4,6 @@ version = "0.1.0"
 authors = ["Nico Tonozzi <nico@nicot.us>"]
 
 [dependencies]
-cocoa = "0.8.0"
+glutin = "*"
+libc = "*"
+gl = "*"

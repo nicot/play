@@ -5,7 +5,8 @@ use self::cocoa::foundation::{NSUInteger, NSRect, NSPoint, NSSize, NSAutorelease
                               NSProcessInfo, NSString};
 use self::cocoa::appkit::{NSApp, NSApplication, NSApplicationActivationPolicyRegular, NSWindow,
                           NSTitledWindowMask, NSBackingStoreBuffered, NSMenu, NSMenuItem,
-                          NSRunningApplication, NSApplicationActivateIgnoringOtherApps};
+                          NSRunningApplication, NSApplicationActivateIgnoringOtherApps,
+                          NSWindowButton};
 
 pub fn make_window() {
     unsafe {
@@ -24,6 +25,8 @@ pub fn make_window() {
             .autorelease();
         window.cascadeTopLeftFromPoint_(NSPoint::new(20., 20.));
         window.center();
+
+        let button = window.standardWindowButton_(NSWindowButton::NSWindowCloseButton);
 
         set_title(window);
         window.makeKeyAndOrderFront_(nil);

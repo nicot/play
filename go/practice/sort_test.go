@@ -11,7 +11,7 @@ func TestQuickSort(t *testing.T) {
 	x := l[0]
 	for i, v := range l[1:] {
 		if v < x {
-			t.Error("Sort failed", v, x, i, l)
+			t.Error("Sort failed", v, x, i, l)                                                                                       
 		}
 	}
 }

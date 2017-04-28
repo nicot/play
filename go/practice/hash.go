@@ -32,7 +32,15 @@ func (h HashTable) String() string {
 	return s + "]"
 }
 
-// Can only hold 2^56? bits of items
+func mod(x, y int) int {
+	t := x % y
+	if t < 0 {
+		t += y
+	}
+	return t
+}
+
+// Can only hold 2^53? bits of items
 func (h *HashTable) Set(key int, value interface{}) {
 	// This can cause it to take more than double load factor if the value hashes to something that already exists
 	load := float64(h.len+1) / float64(h.cap)
@@ -56,34 +64,28 @@ func (h *HashTable) Set(key int, value interface{}) {
 	}
 
 	v1 := &keyVal{key, value}
-	i := 0
+	place := h.hash(v1.key)
 	for {
-		h1 := (h.hash(v1.key) + i) % h.cap
 		// Robin hood!
-		v2 := h.vals[h1]
+		v2 := h.vals[place]
 		if v2 == nil {
 			h.len++
-			h.vals[h1] = v1
+			h.vals[place] = v1
 			break
 		}
 		if v2.key == v1.key {
-			h.vals[h1] = v1
+			h.vals[place] = v1
 			break
 		}
 
-		h2 := h.hash(v2.key)
-
-		d := (h1 - i) % h.cap
-		if d < 0 {
-			d += h.cap
-		}
-		if d < h2 {
-			h.vals[h1] = v1
+		h1 := mod(h.hash(v1.key)-place, h.cap)
+		h2 := mod(h.hash(v2.key)-place, h.cap)
+		if h1 > h2 {
+			h.vals[place] = v1
 			v1 = v2
 		}
-		i++
+		place = (place + 1) % h.cap
 	}
-	fmt.Println(key, value, h)
 }
 
 func (h *HashTable) Get(key int) interface{} {
@@ -101,5 +103,17 @@ func (h *HashTable) Get(key int) interface{} {
 }
 
 func (h *HashTable) Delete(key int) {
-
+	i := h.hash(key)
+	for {
+		if h.vals[i] == nil {
+			break
+		}
+		v := h.vals[i]
+		if v.key == key {
+			h.len -= 1
+			h.vals[i] = nil
+			break
+		}
+		i = (i + 1) % h.cap
+	}
 }

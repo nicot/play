@@ -1,0 +1,7 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "outFile": "../public/out/index.js",
+        "module": "system"
+    }
+}

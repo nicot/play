@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@types/d3": "^4.8.0",
+    "d3": "^4.9.0",
+    "datamaps": "^0.5.8",
+    "typescript": "^2.3.4"
+  },
+  "devDependencies": {
+    "fuse-box": "^2.1.0"
+  }
+}

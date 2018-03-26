@@ -1,8 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
+package practice
 
 const offset uint64 = 14695981039346656037
 const prime uint64 = 1099511628211
@@ -54,13 +50,13 @@ func (f filter) test(elem []byte) bool {
 	return true
 }
 
-func main() {
-	var f filter
-	f.m = 1024
-	f.b = make([]byte, f.m)
-	f.k = 5
+// func main() {
+// 	var f filter
+// 	f.m = 1024
+// 	f.b = make([]byte, f.m)
+// 	f.k = 5
 
-	fmt.Println(f.test([]byte("a")))
-	f.add([]byte("a"))
-	fmt.Println(f.test([]byte("a")))
-}
+// 	fmt.Println(f.test([]byte("a")))
+// 	f.add([]byte("a"))
+// 	fmt.Println(f.test([]byte("a")))
+// }

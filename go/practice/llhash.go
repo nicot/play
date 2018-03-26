@@ -1,10 +1,4 @@
-package main
-
-import "fmt"
-
-func main() {
-	fmt.Println("hello!")
-}
+package practice
 
 type linkedList struct {
 	key   int

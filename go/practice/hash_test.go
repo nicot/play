@@ -20,7 +20,6 @@ func TestSet(t *testing.T) {
 }
 
 func TestSetRand(t *testing.T) {
-	t.Skip()
 	h := HashTable{}
 	d := make(map[int]int)
 	for i := 0; i < 400000; i++ {

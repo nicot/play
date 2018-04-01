@@ -2,6 +2,8 @@ package skip
 
 import (
 	"bytes"
+	"encoding/json"
+	"fmt"
 	"math/rand"
 	"testing"
 )
@@ -15,6 +17,8 @@ func setup() (Skiplist, map[int][]byte) {
 		v := make([]byte, 10)
 		rand.Read(v)
 		s.Set(k, v)
+		b, _ := json.MarshalIndent(s, "", "  ")
+		fmt.Println(string(b))
 		m[k] = v
 	}
 	return s, m

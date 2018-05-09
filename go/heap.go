@@ -93,3 +93,41 @@ func (h *Heap) Verify() bool {
 	}
 	return true
 }
+
+func (h *Heap) Size() int {
+	return len(h.contents)
+}
+
+func runningMedian(n int, smaller Heap, bigger Heap) int {
+	smallerMid := smaller.FindMax()
+	biggerMid := bigger.FindMax()
+
+	smallerSize := smaller.Size()
+	biggerSize := bigger.Size()
+
+	if bigger.Size() > smaller.Size() {
+		if n > biggerMid {
+			bigger.DeleteMax()
+			bigger.Insert(n)
+			smaller.Insert(biggerMid)
+		} else {
+			smaller.Insert(n)
+		}
+	} else {
+		if n < smallerMid {
+			smaller.DeleteMax()
+			smaller.Insert(n)
+			bigger.Insert(smallerMid)
+		} else {
+			bigger.Insert(n)
+		}
+	}
+
+	if bigger.Size() == smaller.Size() {
+		return (bigger.FindMax() + smaller.FindMax()) / 2
+	}
+	if bigger.Size() > smaller.Size {
+		return bigger.FindMax()
+	}
+	return smaller.FindMax()c
+}

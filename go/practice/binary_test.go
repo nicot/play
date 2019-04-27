@@ -120,3 +120,36 @@ func pathSum2(root *BinaryTree, n int, values []int) {
 	pathSum2(root.right, n, values)
 	values = values[:len(values)-1]
 }
+
+func add(a, b int) int {
+	return a + b
+}
+
+const neg = -1
+
+func subtract(a, b int) int {
+	for i := 0; i < b; i++ {
+		a = add(a, neg)
+	}
+	return a
+}
+
+func multiply(a, b int) int {
+	if b < 0 {
+		b = subtract(0, b)
+		a = subtract(0, a)
+	}
+	sum := 0
+	for i := 0; i < b; i++ {
+		sum = add(sum, a)
+	}
+	return sum
+}
+
+func divide(numerator, denominator int) (quotient int, remainder int) {
+	for multiply(denominator, quotient) < numerator {
+		quotient = add(1, quotient)
+	}
+	quotient = subtract(quotient, 1)
+	return quotient, (numerator - multiply(denominator, quotient))
+}

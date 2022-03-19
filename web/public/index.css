@@ -5,6 +5,7 @@ html {
 body {
 	margin: 0;
 	height: 100%;
+	background-color: #f5f8fa;
 }
 
 .content {
@@ -14,17 +15,22 @@ body {
 	align-items: center;
 	flex-direction: column;
 	color: #222;
-	background-color: lightgray;
+}
+
+.content > * {
+	z-index: 1
 }
 
 #canvas {
 	position: absolute;
+	z-index: auto;
 }
 
 #header-image {
 	height: 70%;
 	object-fit: cover;
     width: 100%;
+	z-index: -2;
 }
 
 .snowflake {

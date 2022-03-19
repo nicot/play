@@ -80,7 +80,10 @@ function draw() {
 export default function () {
     canvas.addEventListener('mousemove', e =>
         mousePos = { x: e.offsetX, y: e.offsetY })
-    canvas.addEventListener('mousedown', () => mouseDown = true)
+    canvas.addEventListener('mousedown', e => {
+        mousePos = { x: e.offsetX, y: e.offsetY };
+        mouseDown = true;
+    })
     canvas.addEventListener('mouseup', () => mouseDown = false)
 
     window.addEventListener('resize', resize);

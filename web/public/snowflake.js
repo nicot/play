@@ -8,35 +8,37 @@ let mousePos = null;
 let mouseDown = false;
 let randomSnowedAt = new Date();
 
+function newSnowflake(x, y) {
+    const direction = 1 - Math.round(Math.random()) * 2;
+    snowflakes.push({ x, y, direction, showPercent: 100 })
+}
 function addSnowflakes() {
     const now = Date.now();
     if (mouseDown) {
-        snowflakes.push({ x: mousePos.x, y: mousePos.y })
+        newSnowflake(mousePos.x, mousePos.y);
         mouseUpSnowedAt = now;
     } else if (mousePos && now - mouseUpSnowedAt > 200) {
-        snowflakes.push({ x: mousePos.x, y: mousePos.y })
+        newSnowflake(mousePos.x, mousePos.y);
         mouseUpSnowedAt = now;
     }
     if (now - randomSnowedAt > 1000) {
-        snowflakes.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-        });
+        newSnowflake(Math.random() * canvas.width, Math.random() * canvas.height);
         randomSnowedAt = now;
     }
 }
 
 function resize() {
-    canvas.width = image.clientWidth;
-    canvas.height = image.clientHeight;
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
 }
 
-function drawSnowflake({ x, y }) {
+function drawSnowflake({ x, y, showPercent }) {
     ctx.save();
 
     ctx.translate(x, y);
     ctx.beginPath();
-    ctx.strokeStyle = 'white';
+    const show = showPercent / 100 * .6;
+    ctx.strokeStyle = `rgba(255, 255, 255, ${show})`;
     ctx.moveTo(0, 0);
 
     for (let i = 0; i < 6; i++) {
@@ -57,7 +59,18 @@ function draw() {
 
     snowflakes.forEach(snowflake => {
         snowflake.y += .6;
+        snowflake.x += .3 * snowflake.direction * Math.random();
+        if (Math.random() < 1 / 500) {
+            snowflake.direction *= -1;
+        }
     })
+
+    for (let i = 0; i < snowflakes.length; i++) {
+        if (snowflakes[i].y > image.clientHeight + 100) {
+            snowflakes.splice(i, 1);
+        }
+    }
+
 
     snowflakes.forEach(drawSnowflake);
 

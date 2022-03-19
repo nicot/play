@@ -5,10 +5,12 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<title>Nico Tonozzi</title>
+	<script type="module" src="main.js"></script>
 </head>
 
 <body>
-	<img class="header" src="copper.jpeg" alt="View from Copper Mountain, Colorado.">
+	<canvas id="canvas"></canvas>
+	<img id="header-image" src="copper.jpeg" alt="View from Copper Mountain, Colorado.">
 	<div class="content">
 		<div>Nico Tonozzi</div>
 		<a href="mailto:mail@nicot.us" class="button">Contact</a>
@@ -16,5 +18,9 @@
 		<a href="https://twitter.com/ntonozzi" class="button">Twitter</a>
 	</div>
 </body>
+
+<svg class="snowflake" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+	<circle cx="50" cy="50" r="50" />
+</svg>
 
 </html>

@@ -6,6 +6,11 @@
     "typescript": "^2.3.4"
   },
   "devDependencies": {
+    "firebase-tools": "^10.4.0",
     "fuse-box": "^2.1.0"
-  }
+  },
+  "scripts": {
+    "firebase": "firebase"
+  },
+  "private": true
 }

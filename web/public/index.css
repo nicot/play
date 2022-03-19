@@ -4,6 +4,7 @@ html {
 
 body {
 	margin: 0;
+	height: 100%;
 }
 
 .content {
@@ -13,4 +14,10 @@ body {
 	align-items: center;
 	flex-direction: column;
 	color: #222;
+}
+
+.header {
+	height: 50%;
+	object-fit: cover;
+    width: 100%;
 }

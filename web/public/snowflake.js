@@ -31,6 +31,25 @@ function resize() {
     canvas.height = image.clientHeight;
 }
 
+function drawSnowflake({ x, y }) {
+    ctx.save();
+
+    ctx.translate(x, y);
+    ctx.beginPath();
+    ctx.strokeStyle = 'white';
+    ctx.moveTo(0, 0);
+
+    for (let i = 0; i < 6; i++) {
+        ctx.lineWidth = 2
+        ctx.moveTo(0, 0);
+        ctx.lineTo(3, 3);
+        ctx.rotate(Math.PI / 3);
+    }
+    ctx.stroke();
+
+    ctx.restore();
+}
+
 function draw() {
     addSnowflakes()
 
@@ -40,15 +59,9 @@ function draw() {
         snowflake.y += .6;
     })
 
-    snowflakes.forEach(snowflake => {
-        ctx.beginPath();
-        ctx.strokeStyle = 'white';
-        ctx.arc(snowflake.x, snowflake.y, 3, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.stroke();
-    });
+    snowflakes.forEach(drawSnowflake);
 
-    window.requestAnimationFrame(draw)
+    window.requestAnimationFrame(draw);
 }
 
 export default function () {
@@ -60,4 +73,5 @@ export default function () {
     window.addEventListener('resize', resize);
     window.requestAnimationFrame(draw)
     resize();
+    // drawSnowflake({ x: 100, y: 100 });
 }

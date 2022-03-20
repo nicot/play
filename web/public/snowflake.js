@@ -12,6 +12,7 @@ function newSnowflake(x, y) {
     const direction = 1 - Math.round(Math.random()) * 2;
     snowflakes.push({ x, y, direction, showPercent: 100 })
 }
+
 function addSnowflakes() {
     const now = Date.now();
     if (mouseDown) {
@@ -66,11 +67,15 @@ function draw() {
     })
 
     for (let i = 0; i < snowflakes.length; i++) {
-        if (snowflakes[i].y > image.clientHeight + 100) {
+        const past = snowflakes[i].y - image.clientHeight;
+        const fadeOut = 300;
+        if (past > 0) {
+            snowflakes[i].showPercent = (fadeOut - past) / fadeOut * 100;
+        }
+        if (past > fadeOut) {
             snowflakes.splice(i, 1);
         }
     }
-
 
     snowflakes.forEach(drawSnowflake);
 

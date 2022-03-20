@@ -89,5 +89,4 @@ export default function () {
     window.addEventListener('resize', resize);
     window.requestAnimationFrame(draw)
     resize();
-    // drawSnowflake({ x: 100, y: 100 });
 }

@@ -9,3 +9,5 @@ yarn run firebase serve
 ```
 yarn run firebase deploy
 ```
+
+Use http://nickcammarata.com/ as inspiration.

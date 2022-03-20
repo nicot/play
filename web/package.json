@@ -10,7 +10,6 @@
     "fuse-box": "^2.1.0"
   },
   "scripts": {
-    "firebase": "firebase",
     "serve": "firebase serve",
     "deploy": "firebase deploy"
   },

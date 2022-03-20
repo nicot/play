@@ -1,20 +1,18 @@
-html {
-	height: 100%;
-}
-
 body {
-	margin: 0;
-	height: 100%;
 	background-color: #f5f8fa;
+	margin: 0px;
 }
 
 .content {
-	height: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+	justify-content: space-between;
+	flex-direction: row;
 	color: #222;
+	margin: 20px;
+	max-width: 700px;
+	font-family: Helvetica;
+	font-size: 15px;
+	font-weight: 500;
 }
 
 .content > * {
@@ -23,17 +21,16 @@ body {
 
 #canvas {
 	position: absolute;
-	z-index: auto;
 }
 
 #header-image {
 	height: 70%;
 	object-fit: cover;
     width: 100%;
-	z-index: -2;
 	max-height: 500px;
+	/* add gradient to bottom of image. */
 }
 
-.snowflake {
-	display: none;
+.links > * {
+	margin-left: 20px;
 }

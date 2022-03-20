@@ -68,7 +68,7 @@ function draw() {
 
     for (let i = 0; i < snowflakes.length; i++) {
         const past = snowflakes[i].y - image.clientHeight;
-        const fadeOut = 300;
+        const fadeOut = 100;
         if (past > 0) {
             snowflakes[i].showPercent = (fadeOut - past) / fadeOut * 100;
         }

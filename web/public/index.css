@@ -5,10 +5,10 @@ body {
 
 .content {
 	color: #222;
-	margin: 20px;
+	margin: 10px 20px;
 	max-width: 700px;
 	font-family: Helvetica;
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: 500;
 	z-index: 1;
 	position: relative;
@@ -18,9 +18,10 @@ body {
 	flex-direction: row;
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 20px;
 }
 
-.content div {
+.personal > div {
 	margin: 10px 0;
 }
 
@@ -38,4 +39,8 @@ body {
 
 .links > * {
 	margin-left: 20px;
+}
+
+.name {
+	font-weight: 600;
 }

@@ -23,7 +23,9 @@ function addSnowflakes() {
         mouseUpSnowedAt = now;
     }
     if (now - randomSnowedAt > 1000) {
-        newSnowflake(Math.random() * canvas.width, Math.random() * canvas.height);
+        const x = (Math.random() + .1) / 1.2 * canvas.width;
+        const y = Math.random() * image.clientHeight * .8;
+        newSnowflake(x, y);
         randomSnowedAt = now;
     }
 }
@@ -92,6 +94,7 @@ export default function () {
     canvas.addEventListener('mouseup', () => mouseDown = false)
 
     window.addEventListener('resize', resize);
+    window.addEventListener('load', resize);
     window.requestAnimationFrame(draw)
     resize();
 }
